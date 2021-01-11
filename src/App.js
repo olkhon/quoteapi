@@ -7,18 +7,30 @@ function App() {
 
 let [text, setText] = useState('');
 
+
+
 useEffect( ()=> {
-  axios
-  .get("https://ron-swanson-quotes.herokuapp.com/v2/quotes")
-  .then( (res) => {
-      let accessObjectValue = Object.values(res);
-      let accessArrayValue = accessObjectValue[0];
-      setText(accessArrayValue)
-  })
-  .catch( (error) => {
-    console.log(error);
-  })
-}, []);
+
+  function apiCall () {
+    axios
+    .get("https://ron-swanson-quotes.herokuapp.com/v2/quotes")
+    .then( (res) => {
+        let accessObjectValue = Object.values(res);
+        let accessArrayValue = accessObjectValue[0];
+        setText(accessArrayValue);
+    })
+    .catch( (error) => {
+      console.log(error);
+    })
+  }
+  setInterval(function(){  apiCall()} , 3000);
+  }, []);
+
+
+
+
+
+
 
 
 
